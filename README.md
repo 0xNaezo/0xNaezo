@@ -1,16 +1,19 @@
-## Hi there 👋
+# Hi, I'm 0xNaezo
 
-<!--
-**0xNaezo/0xNaezo** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+Solana Infrastructure Engineer focused on high-performance Rust backends. 
+I build reliable, asynchronous tools for on-chain data extraction and processing.
 
-Here are some ideas to get you started:
+### Tech Stack
+- **Core:** Rust (Tokio, Axum, SQLx, Tracing)
+- **Web3:** Solana SDK, RPC/Helius integrations
+- **Data:** PostgreSQL (Job queues, indexing, relational design)
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+### Featured Project: [On-chain Event Indexer](ссылка_на_твой_репо)
+A high-throughput, async indexer for Solana token transfers and transactions.
+- **Architecture:** Custom DB-backed job queue with an independent `tokio` worker pool.
+- **Resilience:** Implemented exponential backoff for RPC rate limits and batch processing for signatures.
+- **API:** Non-blocking REST API built with `axum`.
+
+---
+
+[Superteam Earn](-) | [X (Twitter)](-) | [Telegram](https://t.me/x0Naezo)
