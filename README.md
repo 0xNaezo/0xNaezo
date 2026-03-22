@@ -8,7 +8,7 @@ I build reliable, asynchronous tools for on-chain data extraction and processing
 - **Web3:** Solana SDK, RPC/Helius integrations
 - **Data:** PostgreSQL (Job queues, indexing, relational design)
 
-### Featured Project: [On-chain Event Indexer](ссылка_на_твой_репо)
+### Featured Project: [On-chain Event Indexer](https://github.com/0xNaezo/On-chain-event-indexer)
 A high-throughput, async indexer for Solana token transfers and transactions.
 - **Architecture:** Custom DB-backed job queue with an independent `tokio` worker pool.
 - **Resilience:** Implemented exponential backoff for RPC rate limits and batch processing for signatures.
