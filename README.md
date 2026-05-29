@@ -17,4 +17,4 @@ A modular, high-performance boilerplate designed to accelerate Solana developmen
 
 ---
 
-[Superteam Earn](-) | [X (Twitter)](-) | [Telegram](https://t.me/x0Naezo)
+[Superteam Earn](-) | [X (Twitter)](https://x.com/0xNaezoDev) | [Telegram](https://t.me/x0Naezo)
