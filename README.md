@@ -1,22 +1,22 @@
 # Hi, I'm 0xNaezo
 
-Solana Infrastructure Engineer focused on high-performance Rust backends. 
-I build reliable, asynchronous tools for on-chain data extraction and processing.
+Solana Infrastructure Engineer focused on high-performance Rust backends. I build reliable, high-throughput network tools and asynchronous infrastructure for the Solana ecosystem
 
 ### Tech Stack
 - **Core:** Rust (Tokio, Axum, SQLx, Tracing)
-- **Web3:** Solana SDK, RPC/Helius integrations
+- **Web3:** Solana SDK, RPC/Helius integrations, Anchor
 - **Data:** PostgreSQL (Job queues, indexing, relational design)
 
-### Featured Project: [AgentSafe](https://github.com/0xNaezo/AgentSafe) [🚧 Active Development]
-**On-chain spending policy vaults for AI agents on Solana.** 
-*(Encode Solana Bootcamp Capstone Project)*
 
-AgentSafe solves the custody problem for AI agents. Instead of giving an AI full access to a wallet, AgentSafe provides a programmable on-chain vault. The agent can request payments, but the Solana program strictly enforces user-defined rules before moving any funds. 
+### Featured Project: FluxRPC [🚧 Active Development]
+**Adaptive Solana RPC load balancer with latency-aware routing and rate limit failover.**
 
-*   **Smart Contract Core (Rust / Anchor):** PDA-based vaults enforcing daily spending limits, token mint locks, and recipient whitelists. The AI never holds custody.
-*   **Solana Actions & Blinks:** Seamless "Manual Approval" flows. When an agent requests a payment outside its auto-limit, the vault owner receives a Blink in their X/Twitter feed to sign and approve the transaction.
-*   **Full-Stack Integration:** Built with Next.js, a custom TypeScript SDK, and a reference AI intent parser translating natural language into strictly typed on-chain requests.
+FluxRPC acts as a protective middleware layer between high-frequency indexers/bots and Solana RPC providers (Helius, Alchemy, Public endpoints). It maximizes uptime and minimizes latency by intelligently routing requests, respecting provider-specific quotas, and seamlessly falling back to secondary nodes during degradation.
+
+*   **Asynchronous High-Throughput Core:** Built on `Tokio` and `Axum`. Achieves extreme concurrency and minimal latency (sub-millisecond overhead) by replacing heavy Mutexes with lock-free atomic operations and Actor-model state management. 
+*   **Granular Rate & Concurrency Limiting:** Enforces strict hardware-level protection per RPC node. Utilizes `tokio::sync::Semaphore` for in-flight request capping and GCRA (Token Bucket) algorithms to strictly respect individual RPS limits, completely preventing HTTP 429 bans.
+*   **Zero-Copy Payload Propagation & Smart Failover:** Bypasses heavy JSON deserialization on the hot path using `bytes::Bytes` for zero-copy proxying. If a node returns a JSON-RPC error or timeouts, FluxRPC intercepts the failure and transparently retries on the next healthy node.
+
 
 ---
 
