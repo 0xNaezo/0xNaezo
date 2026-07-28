@@ -8,15 +8,14 @@ Solana Infrastructure Engineer focused on high-performance Rust backends. I buil
 - **Data:** PostgreSQL (Job queues, indexing, relational design)
 
 
-### Featured Project: FluxRPC [🚧 Active Development]
-**Adaptive Solana RPC load balancer with latency-aware routing and rate limit failover.**
+### Featured Project: CascadeRPC
+**High-performance, protocol-agnostic JSON-RPC reverse proxy with tier-based spillover and sub-millisecond overhead.**
 
-FluxRPC acts as a protective middleware layer between high-frequency indexers/bots and Solana RPC providers (Helius, Alchemy, Public endpoints). It maximizes uptime and minimizes latency by intelligently routing requests, respecting provider-specific quotas, and seamlessly falling back to secondary nodes during degradation.
+CascadeRPC acts as a bulletproof middleware layer between high-frequency applications (Web3 indexers, MEV bots, or heavy Web2 microservices) and upstream providers (e.g., Alchemy, Infura, Helius). It handles traffic spikes gracefully by enforcing provider-specific quotas, executing smart load-shedding, and seamlessly cascading excess requests to secondary infrastructure without dropping client connections.
 
-*   **Asynchronous High-Throughput Core:** Built on `Tokio` and `Axum`. Achieves extreme concurrency and minimal latency (sub-millisecond overhead) by replacing heavy Mutexes with lock-free atomic operations and Actor-model state management. 
-*   **Granular Rate & Concurrency Limiting:** Enforces strict hardware-level protection per RPC node. Utilizes `tokio::sync::Semaphore` for in-flight request capping and GCRA (Token Bucket) algorithms to strictly respect individual RPS limits, completely preventing HTTP 429 bans.
-*   **Zero-Copy Payload Propagation & Smart Failover:** Bypasses heavy JSON deserialization on the hot path using `bytes::Bytes` for zero-copy proxying. If a node returns a JSON-RPC error or timeouts, FluxRPC intercepts the failure and transparently retries on the next healthy node.
-
+*   **Lock-Free RCU Architecture (113k+ RPS):** Built on `Tokio` and `Axum`. Replaced heavy Mutex bottlenecks and Actor models with a Read-Copy-Update (RCU) pattern via `arc-swap`. This allows 100,000+ concurrent workers to read the routing table with zero blocking, achieving <1ms proxy overhead.
+*   **Granular Rate Limiting & Smart Spillover:** Enforces hardware-level protection per upstream node. Combines `tokio::sync::Semaphore` (in-flight capping) and Token Bucket algorithms (`governor`). Instead of returning HTTP 429 bans under heavy load, it mathematically cascades traffic down priority tiers and uses an "earliest-available" wait strategy for micro-bursts.
+*   **Zero-Copy Proxying & Deterministic Failover:** Avoids expensive full-payload JSON deserialization on the hot path by leveraging `bytes::Bytes`. It dynamically parses just enough to differentiate between non-retryable client errors (forwarded instantly) and network/limit failures (transparently retried via background health checks).
 
 ---
 
