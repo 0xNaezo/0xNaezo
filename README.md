@@ -8,7 +8,7 @@ Solana Infrastructure Engineer focused on high-performance Rust backends. I buil
 - **Data:** PostgreSQL (Job queues, indexing, relational design)
 
 
-### Featured Project: CascadeRPC
+### Featured Project: [CascadeRPC](https://github.com/0xNaezo/CascadeRPC)
 **High-performance, protocol-agnostic JSON-RPC reverse proxy with tier-based spillover and sub-millisecond overhead.**
 
 CascadeRPC acts as a bulletproof middleware layer between high-frequency applications (Web3 indexers, MEV bots, or heavy Web2 microservices) and upstream providers (e.g., Alchemy, Infura, Helius). It handles traffic spikes gracefully by enforcing provider-specific quotas, executing smart load-shedding, and seamlessly cascading excess requests to secondary infrastructure without dropping client connections.
